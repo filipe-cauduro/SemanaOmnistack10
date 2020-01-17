@@ -2,12 +2,7 @@ import React from 'react';
 
 import './styles.css';
 
-function DevItem({ dev }) {
-    function deleteDev(e) {
-        console.log(e.target);
-    }
-
-
+function DevItem({ dev, deleteDev}) {    
     return (
         <li className="dev-item">
             <header>
@@ -21,11 +16,7 @@ function DevItem({ dev }) {
             <div className="dev-links">
                 <a href={`https://github.com/${dev.github_username}`}>Acessar perfil no GitHub</a>
                 <div className="dev-actions">
-                    <button className="edit-button">
-                        <i className="material-icons">edit</i>
-                    </button>
-
-                    <button className="delete-button" onClick={deleteDev}>
+                    <button className="delete-button" onClick={(e) => deleteDev(dev._id)}>
                         <i className="material-icons">delete_outline</i>
                     </button>
                 </div>

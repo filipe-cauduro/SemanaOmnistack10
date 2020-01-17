@@ -67,18 +67,17 @@ module.exports = {
             await dev.updateOne({name: name, avatar_url: avatar_url, bio: bio, techs: techsArray, location: location}, {_id: dev._id});
         }
         
-        return res.json(dev);
+        const devs = await Dev.find();
+        
+        return res.json(devs);
     },
     async destroy(req, res){
-        const { github_username } = req.params;
-        const dev = await Dev.findOne({ github_username });
-        
+        const { _id } = req.params;
+        const dev = await Dev.findOne({ _id });
         if (dev) {
-            dev.deleteOne();
-
-            res.json({ message: "Sucesso" });
-        } else {
-            res.json({ message: "Erro" });
+            await dev.deleteOne();
         }
+        const devs = await Dev.find();
+        return res.json(devs);
     },
 }
